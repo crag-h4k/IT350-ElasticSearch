@@ -1,0 +1,51 @@
+#Elasticsearch:
+cluster.name: morgand5
+node.name: node-1
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+transport.host: localhost
+network.host: 0.0.0.0
+transport.tcp.port: 9300
+http.port: 9200
+#######
+#Kibana:
+server.host: "192.168.50.39"
+server.port: 5601
+elasticsearch.username: "user"
+elasticsearch.password: "!TRock3!"
+####################################################################################
+#Filbeat:
+- type: log
+
+  # Change to true to enable this prospector configuration.
+  enabled: true
+
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+    - /var/log/*.log
+    #- c:\programdata\elasticsearch\logs\*
+filebeat.config.modules:
+  # Glob pattern for configuration loading
+  path: ${path.config}/modules.d/*.yml
+
+  # Set to true to enable config reloading
+  reload.enabled: false
+
+  # Period on which files under path should be checked for changes
+  #reload.period: 10s
+  #-------------------------- Elasticsearch output ------------------------------
+  output.elasticsearch:
+  # Array of hosts to connect to.
+  hosts: ["localhost:9200","0.0.0.0:9200","192.168.50.39:9200"]
+ # Kibana Host
+  host: "192.168.50.39:5601"
+##################################################################################
+#Metricbeat:
+setup.kibana:
+  # Kibana Host
+  host: "192.168.50.39:5601"
+#-------------------------- Elasticsearch output ------------------------------
+  output.elasticsearch:
+  # Array of hosts to connect to.
+  hosts: ["localhost:9200","0.0.0.0:9200","192.168.50.39:9200"]
+##################################################################################
