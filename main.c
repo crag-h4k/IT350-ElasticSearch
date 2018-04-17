@@ -32,7 +32,7 @@ int main(void){
 				break;
 			case 'b':
 //change port number, IP, uname, and pword
-				system("mysqldump -P 3306 -h 192.168.50.39 -u webadmin -p !TRock3! py_db > /home/webadmin/backup.sql");
+				system("mysqldump -P 3306 -h 192.168.50.39 -u webadmin -p <pass> py_db > /home/webadmin/backup.sql");
 				break;
 			case 'q':
 //exits
