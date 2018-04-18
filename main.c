@@ -23,8 +23,8 @@ int main(void){
 	printf(RED"----------------------------------------------\n\n"RESET);
 	do{
 		printf(GREEN"# enter your command >>> "RESET);
-		command = getchar(); //grabs character, allows for multiple to be passed in at once 
-// menu 
+		command = getchar(); //grabs character, allows for multiple to be passed in at once
+// menu
 		switch(command){
 			case 's':
 //store your status script in your home dir
@@ -32,7 +32,9 @@ int main(void){
 				break;
 			case 'b':
 //change port number, IP, uname, and pword
-				system("mysqldump -P 3306 -h 192.168.50.39 -u webadmin -p <pass> py_db > /home/webadmin/backup.sql");
+				system("mysqldump -P 3306 -h 192.168.50.39 -u webadmin -p py_db > /home/webadmin/backups/mysql_backup/backup.sql");
+				system("sudo cp /var/lib/redis/dump.rdb /home/webadmin/backups/redis_backup");
+				system("sudo cp -r /var/lib/elasticsearch/nodes/0/indices /home/webadmin/backups/elastic_backup/backup");
 				break;
 			case 'q':
 //exits
@@ -45,7 +47,7 @@ int main(void){
 		printf("\n");
 		fflush(stdin);
 	}
-	
+
 	while(run == 1);
 
 }
